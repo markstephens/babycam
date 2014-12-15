@@ -9,11 +9,11 @@ server {
 	# Make site accessible from http://localhost/
 	server_name localhost;
 
-	root /home/pi/baby_monitor/www/build;
+	root /home/pi/babycam/www/build;
     index index.html;
 
     location / {
-    	expires 12h;
+    	#expires 12h;
     }
 
 	location /video {
@@ -24,7 +24,7 @@ server {
 		default_type text/json;
 		add_header Access-Control-Allow-Origin *;
 		expires 5m;
-		alias /home/pi/baby_monitor/www/temperature/temperature.json;
+		alias /home/pi/babycam/www/temperature/temperature.json;
 	}
 }
 

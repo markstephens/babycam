@@ -4,23 +4,29 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     
-    build_folder: 'build',
+    web_folder: 'www',
+    build_folder: '<%=web_folder %>/build',
 
     clean: ['<%=build_folder %>'],
 
     uglify: {
       build: {
         files: {
-          '<%=build_folder %>/babycam.min.js': ['js/d3.js', 'js/babycam.js']
+          '<%=build_folder %>/babycam.min.js': ['<%=web_folder %>/js/d3.js', '<%=web_folder %>/js/babycam.js']
         }
       }
     },
 
     cssmin: {
       build: {
-        files: {
-          '<%=build_folder %>/babycam.min.css': ['css/bootstrap.min.css', 'css/babycam.css']
-        }
+        options: {
+          relativeTo: '<%=web_folder %>', // Fix for finding the correct font files
+          target: '<%=web_folder %>/build', // Fix for finding the correct font files
+        },
+        files: [{
+          src: ['<%=web_folder %>/css/bootstrap.min.css', '<%=web_folder %>/css/babycam.css'],
+          dest: '<%=build_folder %>/babycam.min.css'
+        }]
       }
     },
 
@@ -33,7 +39,8 @@ module.exports = function(grunt) {
     copy: {
       build: {
           files: [
-            { src: 'index.html', dest: '<%=build_folder %>/index.html' }
+            { src: '<%=web_folder %>/index.html', dest: '<%=build_folder %>/index.html' },
+            { cwd: '<%=web_folder %>', src: 'fonts/*', dest: '<%=build_folder %>/', expand: true }
           ]
       }
     },
@@ -44,10 +51,10 @@ module.exports = function(grunt) {
         assetsDirs: ['<%=build_folder %>'],
         blockReplacements: {
           inlinecss: function (block) {
-              return '<style>' + grunt.file.read("build/" + block.dest) + '</style>';
+              return '<style>' + grunt.file.read("www/build/" + block.dest) + '</style>';
           },
           inlinejs: function (block) {
-              return '<script><!-- ' + grunt.file.read("build/" + block.dest) + ' --></script>';
+              return '<script><!-- ' + grunt.file.read("www/build/" + block.dest) + ' --></script>';
           }
         }
       }
@@ -79,10 +86,10 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('default', [
     'clean',
+    'copy:build',
     'uglify:build',
     'cssmin:build',
     'filerev:build',
-    'copy:build',
     'usemin:html',
     'htmlmin:build'
   ]);

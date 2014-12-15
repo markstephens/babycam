@@ -1,0 +1,3 @@
+# m h  dom mon dow   command
+
+*/10 * * * * modprobe w1-gpio; modprobe w1-therm; python /home/pi/babycam/server/temperature/generate_temp.py
