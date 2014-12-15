@@ -1,7 +1,7 @@
 {
   "name": "babycam",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.2",
+  "description": "This is my take on using a Raspberry PI as a Baby Monitor. Including Camera and Temperature sensor.",
   "author": "Mark Stephens",
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -9,8 +9,18 @@
     "grunt-contrib-copy": "^0.7.0",
     "grunt-contrib-cssmin": "^0.10.0",
     "grunt-contrib-htmlmin": "^0.3.0",
+    "grunt-contrib-imagemin": "^0.9.2",
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-filerev": "^2.1.2",
     "grunt-usemin": "^3.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markstephens/babycam.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/markstephens/babycam/issues"
+  },
+  "homepage": "https://github.com/markstephens/babycam"
 }

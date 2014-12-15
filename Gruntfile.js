@@ -70,6 +70,17 @@ module.exports = function(grunt) {
           '<%=build_folder %>/index.html': '<%=build_folder %>/index.html'     // 'destination': 'source'
         }
       }
+    },
+
+    imagemin: {
+      build: {
+        files: [{
+          expand: true,                       // Enable dynamic expansion
+          cwd: '<%=web_folder %>/images/',     // Src matches are relative to this path
+          src: ['**/*.{png,jpg,gif}'],        // Actual patterns to match
+          dest: '<%=build_folder %>/images/'  // Destination path prefix
+        }]
+      }
     }
 
   });
@@ -82,6 +93,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-filerev');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
 
   // Default task(s).
   grunt.registerTask('default', [
@@ -91,6 +103,7 @@ module.exports = function(grunt) {
     'cssmin:build',
     'filerev:build',
     'usemin:html',
-    'htmlmin:build'
+    'htmlmin:build',
+    'imagemin:build'
   ]);
 };
