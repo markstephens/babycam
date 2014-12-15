@@ -98,7 +98,7 @@ var BabyMonitor = (function (d3) {
                     .attr("x2", 0).attr("y2", y(y.domain()[0]))      
                     .selectAll("stop")                      
                     .data(([y.domain()[1]].concat(colors.domain().reverse().concat([y.domain()[0]]))).map(function (c) {
-                        console.log(c, ((y(c) / height) * 100).toFixed(0) + "%", colors(c), colors(18), colors(17.9));
+                        //console.log(c, ((y(c) / height) * 100).toFixed(0) + "%", colors(c), colors(18), colors(17.9));
                         return { offset: ((y(c) / height) * 100).toFixed(0) + "%", color: colors(c) };
                     }))                  
                     .enter().append("stop")         
