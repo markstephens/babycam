@@ -1,0 +1,93 @@
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+}
+.fullscreen {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.fullscreen.image {
+    background: no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#error_page {
+    z-index: 10000;
+    padding: 5em;
+    background: rgba(255,255,255,0.5);
+    color: #C00;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    font-family: courier;
+    display: none;
+}
+
+#webcam {
+    text-align: center;
+}
+#webcam nav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+#webcam .video {
+    
+}
+#temp {
+    text-align: center;
+}
+#temp .narrow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -160px 0 0 -160px;
+}
+#temp .narrow svg {
+    width: 320px;
+    height: 320px;
+}
+#temp .narrow .wrapper {
+    transform: translate(160px, 160px)
+}
+#temp .narrow .number {
+    font-size: 5em;
+    transform: translate(-85px, 30px);
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.line {                         
+    fill: none;                 
+    stroke: url(#line-gradient);    
+    stroke-width: 2px;          
+}
+
+@media (max-width: 450px) {
+    #temp .narrow {
+        display: block;
+    }
+    #temp .wide {
+        display: none;
+    }
+}
+@media (min-width: 451px) {
+    #temp .narrow {
+        display: none;
+    }
+    #temp .wide {
+        display: block;
+    }
+}
