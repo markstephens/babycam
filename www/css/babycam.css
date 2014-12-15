@@ -46,19 +46,18 @@ body {
 #temp {
     text-align: center;
 }
-#temp .narrow {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    /*margin: -160px 0 0 -160px;*/
-}
 #temp .narrow svg {
     width: 320px;
     height: 320px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -160px;
+    margin-top: -160px;
 }
-#temp .narrow .wrapper {
+/*#temp .narrow .wrapper {
     transform: translate(160px, 160px)
-}
+}*/
 #temp .narrow .number {
     font-size: 5em;
     transform: translate(-85px, 30px);
