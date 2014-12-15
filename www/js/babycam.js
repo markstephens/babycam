@@ -1,8 +1,6 @@
 /*global jQuery */
-var BabyMonitor = (function (device, d3) {
+var BabyMonitor = (function (d3) {
     "use strict";
-
-    var server = '192.168.0.11';
 
     function home(cb) {
         cb(null, '<section id="home" class="fullscreen"><div class="fullscreen image"></div></section>', function () {
@@ -21,15 +19,7 @@ var BabyMonitor = (function (device, d3) {
         ];
 
         cb(null, html.join(''), function () {
-            var connection = 'low';
-
-            try {
-                if (device.connection.type === Connection.WIFI) {
-                    connection = 'high';
-                }
-            } catch (e) {};
-            
-            d3.select('#webcam .video').style('background-image', 'url(http://' + server + '/video)');
+            d3.select('#webcam .video').style('background-image', 'url(/video)');
         });
     }
 
@@ -51,7 +41,7 @@ var BabyMonitor = (function (device, d3) {
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
 
-            d3.json('http://' + server + '/temp', function (error, json) {
+            d3.json('/temp', function (error, json) {
                 if (error) {
                     return console.error(error);
                 }
@@ -208,4 +198,4 @@ var BabyMonitor = (function (device, d3) {
         init: init
     };
 
-}(navigator, d3));
+}(d3));
