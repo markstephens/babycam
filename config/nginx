@@ -10,11 +10,7 @@ server {
 	server_name localhost;
 
 	root /home/pi/babycam/www/build;
-    index index.html;
-
-    location / {
-    	#expires 12h;
-    }
+	index index.html;
 
 	location /video {
 		proxy_pass http://127.0.0.1:8080/?action=stream;    
@@ -24,7 +20,10 @@ server {
 		default_type text/json;
 		add_header Access-Control-Allow-Origin *;
 		expires 5m;
-		alias /home/pi/babycam/www/temperature/temperature.json;
+		alias /home/pi/babycam/server/temperature/temperature.json;
+	}
+
+	location / {
+		expires 30d;
 	}
 }
-
