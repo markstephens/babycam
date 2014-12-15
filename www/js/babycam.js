@@ -24,7 +24,7 @@ var BabyMonitor = (function (d3) {
     }
 
     function temp(cb) {
-        cb(null, '<section id="temp" class="fullscreen"><div class="narrow fullscreen></div><div class="wide"></div></section>', function () {
+        cb(null, '<section id="temp" class="fullscreen"><div class="narrow fullscreen"></div><div class="wide"></div></section>', function () {
 
             var colors = d3.scale.linear()
                     .domain([16,17.5,18.5,19,19.5])
