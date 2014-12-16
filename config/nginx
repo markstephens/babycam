@@ -23,6 +23,10 @@ server {
 		alias /home/pi/babycam/server/temperature/temperature.json;
 	}
 
+	location /v {
+		rewrite \d / last;
+	}
+
 	location / {
 		expires 30d;
 	}
