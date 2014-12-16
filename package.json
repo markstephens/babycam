@@ -10,6 +10,7 @@
     "grunt-contrib-cssmin": "^0.10.0",
     "grunt-contrib-htmlmin": "^0.3.0",
     "grunt-contrib-imagemin": "^0.9.2",
+    "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-filerev": "^2.1.2",
     "grunt-usemin": "^3.0.0"

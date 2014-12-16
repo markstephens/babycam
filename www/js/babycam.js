@@ -2,9 +2,11 @@
 var BabyMonitor = (function (d3) {
     "use strict";
 
+    var onunload = function () {};
+
     function home(cb) {
         cb(null, '<section id="home" class="fullscreen"><div class="fullscreen image"></div></section>', function () {
-            d3.select('#home .image').style('background-image', 'url()');
+            //d3.select('#home .image').style('background-image', 'url()');
         });
     }
 
@@ -20,6 +22,8 @@ var BabyMonitor = (function (d3) {
 
         cb(null, html.join(''), function () {
             d3.select('#webcam .video').style('background-image', 'url(/video)');
+        }, function () {
+            d3.select('#webcam .video').style('background-image', '');
         });
     }
 
@@ -31,6 +35,8 @@ var BabyMonitor = (function (d3) {
                     .range(['blue','green','green','yellow','red']),
                 narrow = d3.select('#temp div.narrow')
                     .append('svg')
+                    .attr("width", 320)
+                    .attr("height", 320)
                     .append('g')
                     .attr('class', 'wrapper'),
                 margin = {top: 10, right: 10, bottom: 30, left: 50},
@@ -39,7 +45,7 @@ var BabyMonitor = (function (d3) {
                 wide = d3.select('#temp div.wide')
                     .append('svg')
                     .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom)
+                    .attr("height", height + margin.top + margin.bottom);
 
             d3.json('/temp', function (error, json) {
                 if (error) {
@@ -47,15 +53,17 @@ var BabyMonitor = (function (d3) {
                 }
                 
                 json.forEach(function (d) {
-                    d.date = new Date(Date.parse(d.date));
+                    // 2014-12-15 17:30:01
+                    // Date.parse doesn't work in safari!!
+                    var a = d.date.split(/[^0-9]/);
+                    d.date = new Date(a[0], a[1]-1, a[2], a[3], a[4], a[5]);
                 });
 
                 json = json.sort(function (a, b) { return a.date > b.date ? 1 : a.date < b.date ? -1 : 0; });
-
+                
                 var latest = json[json.length - 1];
 
                 // NARROW VIEW
-
                 narrow
                     .append('circle')
                     .attr('r', 150)
@@ -64,7 +72,7 @@ var BabyMonitor = (function (d3) {
                     .append('g')
                     .attr('class', 'number')
                     .append('text')
-                    .html(latest.temp.toFixed(1) + '&deg;');   
+                    .text(latest.temp.toFixed(1) + '°');   
 
                 // WIDE VIEW
                 var x = d3.time.scale()
@@ -106,7 +114,7 @@ var BabyMonitor = (function (d3) {
                     .attr("stop-color", function(d) { return d.color; });   
 
                 wide = wide.append('g')
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
                 wide.append("g")
                     .attr("class", "x axis")
@@ -121,7 +129,7 @@ var BabyMonitor = (function (d3) {
                     .attr("y", 6)
                     .attr("dy", ".71em")
                     .style("text-anchor", "end")
-                    .html("Temperature (&deg;C)");
+                    .text("Temperature (°C)");
 
                 wide.append("path")
                     .datum(json)
@@ -154,18 +162,28 @@ var BabyMonitor = (function (d3) {
     }
 
     function load_page(page) {
+        onunload();
         loading();
 
         d3.selectAll('#nav li').classed('active', false);
         d3.select('#nav li#nav-' + page).classed('active', true);
 
-        pages[page](function (error, html, load) {
+        pages[page](function (error, html, load, unload) {
             if (error) {
                 return load_error(error);
             }
 
+            if (typeof load === "undefined") {
+                load = function () {};
+            }
+
+            if (typeof unload === "undefined") {
+                unload = function () {};
+            }
+
             d3.select(page_container).html(html);
             load();
+            onunload = unload;
         });
     }
 

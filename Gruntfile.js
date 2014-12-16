@@ -7,6 +7,10 @@ module.exports = function(grunt) {
     web_folder: 'www',
     build_folder: '<%=web_folder %>/build',
 
+    jshint: {
+      build: ['<%=web_folder %>/js/babycam.js']
+    }, 
+
     clean: ['<%=build_folder %>'],
 
     uglify: {
@@ -85,7 +89,7 @@ module.exports = function(grunt) {
 
   });
 
-  // Load the plugin that provides the "uglify" task.
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-usemin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -97,6 +101,7 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', [
+    'jshint',
     'clean',
     'copy:build',
     'uglify:build',

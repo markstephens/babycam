@@ -13,7 +13,7 @@ class GenerateTemp(object):
 		readings = self.read_json()
 
 		readings.append({
-			'date': datetime.datetime.now().isoformat(' '),
+			'date': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
 			'temp': self.read_temp()
 		})
 
