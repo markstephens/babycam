@@ -29,5 +29,9 @@ server {
 
 	location / {
 		expires 30d;
+
+		location images/splash {
+			expires 2y;
+		}
 	}
 }

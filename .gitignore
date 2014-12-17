@@ -1,3 +1,4 @@
 node_modules
 server/temperature/temperature.json
 www/images/splash
+www/build/images/splash

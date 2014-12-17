@@ -3,12 +3,12 @@ var BabyMonitor = (function (d3) {
     "use strict";
 
     var onunload = function () {};
-    var splash_images = [];
+    var splash_images = ['scan-1.jpg', 'scan-2.jpg', 'scan-3.jpg'];
 
     function home(cb) {
         cb(null, '<section id="home" class="fullscreen"><div class="fullscreen image"></div></section>', function () {
-            //d3.select('#home .image')
-            //    .style('background-image', 'url(' + splash_images[Math.floor(Math.random() * splash_images.length)] + ')');
+            d3.select('#home .image')
+                .style('background-image', 'url(images/splash/' + splash_images[Math.floor(Math.random() * splash_images.length)] + ')');
         });
     }
 
