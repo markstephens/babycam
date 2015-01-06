@@ -1,6 +1,6 @@
 {
   "name": "babycam",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "This is my take on using a Raspberry PI as a Baby Monitor. Including Camera and Temperature sensor.",
   "author": "Mark Stephens",
   "devDependencies": {
