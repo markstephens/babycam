@@ -1,4 +1,5 @@
 # m h  dom mon dow   command
 
+@reboot /home/pi/babycam/server/camera/start_camera.sh
 */10 * * * * modprobe w1-gpio; modprobe w1-therm; python /home/pi/babycam/server/temperature/generate_temp.py
 */5 * * * * python /home/pi/babycam/server/camera/light_sensor.py
